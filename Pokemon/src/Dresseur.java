@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Dresseur extends Personnage {
     private ArrayList<Pokemon> pokemons;
@@ -55,4 +56,26 @@ public class Dresseur extends Personnage {
         this.items = items;
         this.victories = victories;
     }
+
+    public void afficherAllPokemons(ArrayList<Pokemon>pokemons) {
+        System.out.println("Choisi ta team de pokemon !");
+        int i = 0;
+        while ( i != pokemons.size()) {
+            System.out.println(i + " - " + "Name : " + pokemons.get(i).getName() + ", Type :  " + pokemons.get(i).getType().getName() + ", Attaques : [" + pokemons.get(i).getMoves().getFirst().getName() + "/" + pokemons.get(i).getMoves().get(1).getName() + "]" + ", Puissance : " + pokemons.get(i).getAttaque() + ", Defense : " + pokemons.get(i).getDefense());
+            i ++;
+        }
+    }
+
+    public void choisirPokemon(ArrayList<Pokemon>pokemons) {
+        this.afficherAllPokemons(pokemons);
+        int i = 0;
+        int y = 6;
+        while (i != 6){
+            System.out.println("Pokemon restant à choisir : " + y );
+            Scanner scanner = new Scanner(System.in);
+            i ++;
+            y --;
+        }
+    }
+
 }
