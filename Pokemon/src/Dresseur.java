@@ -55,9 +55,4 @@ public class Dresseur extends Personnage {
         this.items = items;
         this.victories = victories;
     }
-
-    @Override
-    public void attaque(String cible, int dammage) {
-
-    }
 }

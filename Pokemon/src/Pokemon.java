@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.lang.Math;
+import java.util.Objects;
 
 public class Pokemon extends Personnage {
     private int currentPV;
@@ -84,11 +86,6 @@ public class Pokemon extends Personnage {
         this.moves = moves;
     }
 
-    @Override
-    public void attaque(String cible, int dammage) {
-        System.out.println("Attaque pokemon");
-    }
-
     public void ajouterAttaque(Attaque attaque) {
         moves.add(attaque);
     }
@@ -130,5 +127,27 @@ public class Pokemon extends Personnage {
                 ", moves=" + moves +
                 ", status='" + status +
                 '}';
+    }
+
+    public void attaquer(Pokemon cible, Attaque attaque) {
+        cible.recevoirDegat(attaque, this.attaque);
+    }
+
+    public void recevoirDegat(Attaque attaque, int puissance) {
+        Double rand = Math.random() * 100;
+        if (rand > attaque.getAccuracy() ) {
+            System.out.println("Attaque failed");
+        } else {
+            if (Objects.equals(attaque.getType().getStrengths().get(0), this.getType().getName())) {
+                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 1.2;
+                System.out.println("super efficace");
+            } else if (this.getType().getStrengths().get(0).equals(attaque.getType().getName())){
+                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 0.5;
+                System.out.println("tres peu efficace");
+            } else {
+                this.currentPV -= (attaque.getDamage() * puissance) / this.defense;
+                System.out.println("attaque normal");
+            }
+        }
     }
 }
