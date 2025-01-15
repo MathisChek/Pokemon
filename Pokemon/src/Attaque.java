@@ -1,6 +1,9 @@
 import jdk.jfr.Percentage;
 
-public class Attaque {
+public class
+
+
+Attaque {
     private String name;
     private AttaqueType type;
     private int damage;
