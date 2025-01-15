@@ -12,7 +12,7 @@ public class Pokemon extends Personnage {
     private int defense;
     private int speed;
     private ArrayList<Attaque> moves;
-    private String status;
+    private Boolean ko;
 
     public int getCurrentPV() {
         return currentPV;
@@ -90,15 +90,15 @@ public class Pokemon extends Personnage {
         moves.add(attaque);
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getKo() {
+        return ko;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setKo(Boolean ko) {
+        this.ko = ko;
     }
 
-    public Pokemon(String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque, int defense, int speed, ArrayList<Attaque> moves, String status) {
+    public Pokemon(String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque, int defense, int speed, ArrayList<Attaque> moves, Boolean ko) {
         super(name);
         this.currentPV = currentPV;
         this.type = type;
@@ -109,7 +109,7 @@ public class Pokemon extends Personnage {
         this.defense = defense;
         this.speed = speed;
         this.moves = moves;
-        this.status = status;
+        this.ko = ko;
     }
 
     @Override
@@ -125,7 +125,7 @@ public class Pokemon extends Personnage {
                 ", defense=" + defense +
                 ", speed=" + speed +
                 ", moves=" + moves +
-                ", status='" + status +
+                ", status='" + ko +
                 '}';
     }
 
@@ -136,17 +136,17 @@ public class Pokemon extends Personnage {
     public void recevoirDegat(Attaque attaque, int puissance) {
         Double rand = Math.random() * 100;
         if (rand > attaque.getAccuracy() ) {
-            System.out.println("Attaque failed");
+            System.out.println("Attaque manquée");
         } else {
             if (Objects.equals(attaque.getType().getStrengths().get(0), this.getType().getName())) {
                 this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 1.2;
-                System.out.println("super efficace");
+                System.out.println("Super efficace");
             } else if (this.getType().getStrengths().get(0).equals(attaque.getType().getName())){
                 this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 0.5;
-                System.out.println("tres peu efficace");
+                System.out.println("Tres peu efficace");
             } else {
                 this.currentPV -= (attaque.getDamage() * puissance) / this.defense;
-                System.out.println("attaque normal");
+                System.out.println("Attaque normal");
             }
         }
     }
