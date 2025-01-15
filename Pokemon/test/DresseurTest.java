@@ -34,7 +34,7 @@ public class DresseurTest {
         assert trainer.getVictories() == 5 : "Le nombre de victoires doit être 5";
 
         trainer.setName("Misty");
-        trainer.setPokemons(new ArrayList<>()); /
+        trainer.setPokemons(new ArrayList<>());
         trainer.setItems(new ArrayList<>());
         trainer.setPokedollars(500);
         trainer.setDefeates(1);
