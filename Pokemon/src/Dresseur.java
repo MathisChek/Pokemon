@@ -58,6 +58,6 @@ public class Dresseur extends Personnage {
 
     @Override
     public void attaque(String cible, int dammage) {
-
+        System.out.println("attack " + cible + " damage " + dammage);
     }
 }
