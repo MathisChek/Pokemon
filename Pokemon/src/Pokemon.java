@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.lang.Math;
+import java.util.Objects;
 
 public class Pokemon extends Personnage {
     private int currentPV;
@@ -10,7 +12,7 @@ public class Pokemon extends Personnage {
     private int defense;
     private int speed;
     private ArrayList<Attaque> moves;
-    private String status;
+    private Boolean ko;
 
     public int getCurrentPV() {
         return currentPV;
@@ -84,24 +86,19 @@ public class Pokemon extends Personnage {
         this.moves = moves;
     }
 
-    @Override
-    public void attaque(String cible, int dammage) {
-        System.out.println("Attaque pokemon");
-    }
-
     public void ajouterAttaque(Attaque attaque) {
         moves.add(attaque);
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getKo() {
+        return ko;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setKo(Boolean ko) {
+        this.ko = ko;
     }
 
-    public Pokemon(String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque, int defense, int speed, ArrayList<Attaque> moves, String status) {
+    public Pokemon(String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque, int defense, int speed, ArrayList<Attaque> moves, Boolean ko) {
         super(name);
         this.currentPV = currentPV;
         this.type = type;
@@ -112,7 +109,7 @@ public class Pokemon extends Personnage {
         this.defense = defense;
         this.speed = speed;
         this.moves = moves;
-        this.status = status;
+        this.ko = ko;
     }
 
     @Override
@@ -128,7 +125,29 @@ public class Pokemon extends Personnage {
                 ", defense=" + defense +
                 ", speed=" + speed +
                 ", moves=" + moves +
-                ", status='" + status +
+                ", status='" + ko +
                 '}';
+    }
+
+    public void attaquer(Pokemon cible, Attaque attaque) {
+        cible.recevoirDegat(attaque, this.attaque);
+    }
+
+    public void recevoirDegat(Attaque attaque, int puissance) {
+        Double rand = Math.random() * 100;
+        if (rand > attaque.getAccuracy() ) {
+            System.out.println("Attaque manquée");
+        } else {
+            if (Objects.equals(attaque.getType().getStrengths().get(0), this.getType().getName())) {
+                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 1.2;
+                System.out.println("Super efficace");
+            } else if (this.getType().getStrengths().get(0).equals(attaque.getType().getName())){
+                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 0.5;
+                System.out.println("Tres peu efficace");
+            } else {
+                this.currentPV -= (attaque.getDamage() * puissance) / this.defense;
+                System.out.println("Attaque normal");
+            }
+        }
     }
 }

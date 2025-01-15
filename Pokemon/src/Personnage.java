@@ -12,6 +12,4 @@ public abstract class Personnage {
     public void setName(String name) {
         this.name = name;
     }
-
-    public abstract void attaque(String cible, int dammage);
 }
