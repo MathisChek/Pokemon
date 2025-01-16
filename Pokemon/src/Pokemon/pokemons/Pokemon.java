@@ -10,6 +10,10 @@ public class Pokemon extends Personnage {
     private PokemonType type;
     private int level;
     private int exp;
+
+    private int nextLevel;
+
+
     private int maxPV;
     private int attaque;
     private int defense;
@@ -39,6 +43,14 @@ public class Pokemon extends Personnage {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getNextLevel() {
+        return nextLevel;
+    }
+
+    public void setNextLevel(int nextLevel) {
+        this.nextLevel = nextLevel;
     }
 
     public int getExp() {
@@ -107,6 +119,7 @@ public class Pokemon extends Personnage {
         this.type = type;
         this.exp = exp;
         this.level = level;
+        this.nextLevel = nextLevel;
         this.maxPV = maxPV;
         this.attaque = attaque;
         this.defense = defense;
@@ -153,5 +166,28 @@ public class Pokemon extends Personnage {
                 System.out.println("attaque normal");
             }
         }
+    }
+
+    public void gagneXP(Pokemon PokemonKo ) {
+            int xpGagnee = PokemonKo.getLevel() * 10;
+            this.exp += xpGagnee;
+
+
+            while(this.exp>this.nextLevel) {
+                this.level ++;
+                System.out.println(this.getName() + " a gagné un niveau ! ");
+                this.nextLevel += 30;
+                System.out.println(this.getName() + " à gagné " + xpGagnee + " points d'expérience ! Niveau : " + this.level);
+
+                this.attaque += 2;
+                this.defense += 1;
+                this.speed += 1;
+                System.out.println("Nouvelle attaque : " + this.attaque);
+                System.out.println("Nouvelle défense : " + this.defense);
+                System.out.println("Nouvelle vitesse : " + this.speed);
+
+
+            }
+
     }
 }
