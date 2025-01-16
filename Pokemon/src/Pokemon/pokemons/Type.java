@@ -1,3 +1,5 @@
+package Pokemon.pokemons;
+
 import java.util.ArrayList;
 
 public abstract class Type {
@@ -15,7 +17,7 @@ public abstract class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "Pokemon.pokemons.Type{" +
                 "name='" + name + '\'' +
                 ", effect='" + effect + '\'' +
                 ", weaknesses=" + weaknesses +

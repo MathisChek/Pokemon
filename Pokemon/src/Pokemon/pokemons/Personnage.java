@@ -1,3 +1,5 @@
+package Pokemon.pokemons;
+
 public abstract class Personnage {
     private String name;
 

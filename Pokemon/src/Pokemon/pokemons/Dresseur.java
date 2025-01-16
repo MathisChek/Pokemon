@@ -1,3 +1,5 @@
+package Pokemon.pokemons;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +9,15 @@ public class Dresseur extends Personnage {
     private int victories;
     private int defeates;
     private int pokedollars;
+    private Pokemon currentPokemon;
+
+    public Pokemon getCurrentPokemon() {
+        return currentPokemon;
+    }
+
+    public void setCurrentPokemon(Pokemon currentPokemon) {
+        this.currentPokemon = currentPokemon;
+    }
 
     public ArrayList<Pokemon> getPokemons() {
         return pokemons;
@@ -48,28 +59,24 @@ public class Dresseur extends Personnage {
         this.pokedollars = pokedollars;
     }
 
-    public Dresseur(String name, ArrayList<Pokemon> pokemons, int pokedollars, int defeates, ArrayList<Item> items, int victories) {
+    public Dresseur(String name, ArrayList<Pokemon> pokemons, int pokedollars, int defeates, ArrayList<Item> items, int victories, Pokemon currentPokemon) {
         super(name);
         this.pokemons = pokemons;
         this.pokedollars = pokedollars;
         this.defeates = defeates;
         this.items = items;
         this.victories = victories;
+        this.currentPokemon = currentPokemon;
     }
 
     public void afficherAllPokemons(ArrayList<Pokemon>pokemons) {
         System.out.println("Choisi ta team de pokemon !");
         int i = 0;
-        while ( i != pokemons.size()) {
-            System.out.print(i+1 + " - " + "Name : " + pokemons.get(i).getName() + ", Type : " + pokemons.get(i).getType().getName() + ", Attaques : [");
-
-            if (pokemons.get(i).getMoves().size() > 0) {
-                System.out.print(pokemons.get(i).getMoves().get(0).getName());
+        while ( i < pokemons.size()) {
+            if (pokemons.get(i).getCurrentPV() > 0) {
+                System.out.println(i + " - " + "Name : " + pokemons.get(i).getName() + ", Type :  " + pokemons.get(i).getType().getName() + ", Puissance : " + pokemons.get(i).getAttaque() + ", Defense : " + pokemons.get(i).getDefense());
             }
-            if (pokemons.get(i).getMoves().size() > 1) {
-                System.out.print("/" + pokemons.get(i).getMoves().get(1).getName());
-            }
-            System.out.println("], Puissance : " + pokemons.get(i).getAttaque() + ", Defense : " + pokemons.get(i).getDefense());            i ++;
+            i ++;
         }
     }
 
@@ -79,20 +86,40 @@ public class Dresseur extends Personnage {
         int y = 6;
         while (i != 6){
             System.out.println("Pokemon restant à choisir : " + y );
-            System.out.println("Choose your next pokemon : " );
             Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt()-1;
-            this.pokemons.add(pokemons.get(choice));
-            System.out.println("You choose " + pokemons.get(choice).getName() + " !" );
             i ++;
             y --;
         }
-        System.out.println("Your team is : " );
-        i = 0;
-        while (i != pokemons.size()) {
-            System.out.println(pokemons.get(i).getName());
-            i++;
+    }
+
+    public boolean pokemonsKo(){
+        int i = 0;
+        int nbPokemonKo = 0;
+        while (i < this.getPokemons().size() ) {
+            if (this.getPokemons().get(i).getKo()) {
+                nbPokemonKo++;
+                i++;
+            } else {
+                i++;
+                continue;
+            }
         }
+        if (nbPokemonKo < this.getPokemons().size()) {
+            return false;
+        } else if (nbPokemonKo == this.getPokemons().size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void changePokemon() {
+        this.afficherAllPokemons(this.getPokemons());
+        System.out.println("Choisi ton pokemon :");
+        Scanner scanner = new Scanner(System.in);
+        int pokemonId = scanner.nextInt();
+
+        this.setCurrentPokemon(this.getPokemons().get(pokemonId));
     }
 
 }

@@ -1,6 +1,9 @@
+package Pokemon.pokemons;
+
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Objects;
+
 
 public class Pokemon extends Personnage {
     private int currentPV;
@@ -127,7 +130,7 @@ public class Pokemon extends Personnage {
 
     @Override
     public String toString() {
-        return "Pokemon{" +
+        return "Pokemon.pokemons.Pokemon{" +
                 "name= " + this.getName() +
                 ", currentPV=" + currentPV +
                 ", type=" + type +
@@ -138,28 +141,29 @@ public class Pokemon extends Personnage {
                 ", defense=" + defense +
                 ", speed=" + speed +
                 ", moves=" + moves +
-                ", status='" + ko +
+                ", ko='" + ko +
                 '}';
     }
 
     public void attaquer(Pokemon cible, Attaque attaque) {
+        System.out.println(this.getName() + " attaque " + cible.getName() + " avec " + attaque.getName());
         cible.recevoirDegat(attaque, this.attaque);
     }
 
     public void recevoirDegat(Attaque attaque, int puissance) {
         Double rand = Math.random() * 100;
         if (rand > attaque.getAccuracy() ) {
-            System.out.println("Attaque manquée");
+            System.out.println("Attaque failed");
         } else {
-            if (Objects.equals(attaque.getType().getStrengths().get(0), this.getType().getName())) {
-                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 1.2;
-                System.out.println("Super efficace");
+            if (Objects.equals(attaque.getType().getStrengths().getFirst(), this.getType().getName())) {
+                this.currentPV -= (((attaque.getDamage() * puissance) / this.defense) * 1.2);
+                System.out.println("super efficace");
             } else if (this.getType().getStrengths().get(0).equals(attaque.getType().getName())){
-                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense) * 0.5;
-                System.out.println("Tres peu efficace");
+                this.currentPV -= (((attaque.getDamage() * puissance) / this.defense) * 0.5);
+                System.out.println("tres peu efficace");
             } else {
-                this.currentPV -= (attaque.getDamage() * puissance) / this.defense;
-                System.out.println("Attaque normal");
+                this.currentPV -= ((attaque.getDamage() * puissance) / this.defense);
+                System.out.println("attaque normal");
             }
         }
     }
