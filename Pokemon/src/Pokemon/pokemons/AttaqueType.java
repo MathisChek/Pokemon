@@ -1,3 +1,5 @@
+package Pokemon.pokemons;
+
 import java.util.ArrayList;
 
 public class AttaqueType extends Type {
