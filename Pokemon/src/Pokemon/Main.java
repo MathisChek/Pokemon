@@ -5,12 +5,13 @@ import Pokemon.pokemons.Attaque;
 import Pokemon.pokemons.AttaqueType;
 import Pokemon.pokemons.Pokemon;
 import Pokemon.pokemons.PokemonType;
+import Pokemon.pokemons.PokemonPrinter;
 import Pokemon.pokemons.ConnectDB;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+//import com.mongodb.client.MongoClient;
+//import com.mongodb.client.MongoClients;
+//import com.mongodb.client.MongoCollection;
+//import com.mongodb.client.MongoDatabase;
+//import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class Main {
         attaqueTypes.add(new AttaqueType("plante", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
         attaqueTypes.add(new AttaqueType("eau", "Super efficace contre le type feu", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("feu"))));
 
-        AttaqueType attaque_normal = attaqueTypes.getFirst();
+        AttaqueType attaque_normal = attaqueTypes.get(0);
         AttaqueType attaque_feu = attaqueTypes.get(1);
         AttaqueType attaque_electrique = attaqueTypes.get(2);
         AttaqueType attaque_plante = attaqueTypes.get(3);
@@ -50,7 +51,7 @@ public class Main {
         pokemonTypes.add(new PokemonType("plante", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
         pokemonTypes.add(new PokemonType("eau", "Super efficace contre le type feu", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("eau"))));
 
-        PokemonType pokemon_normal = pokemonTypes.getFirst();
+        PokemonType pokemon_normal = pokemonTypes.get(0);
         PokemonType pokemon_feu = pokemonTypes.get(1);
         PokemonType pokemon_electrique = pokemonTypes.get(2);
         PokemonType pokemon_plante = pokemonTypes.get(3);
@@ -66,7 +67,7 @@ public class Main {
         //Liste des pokemons
         ArrayList<Pokemon> pokemonsAsh = new ArrayList<>();
         pokemonsAsh.add(new Pokemon("Pikachu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 5, new ArrayList(Arrays.asList(charge, foudre)), false));
-        pokemonsAsh.add(new Pokemon("Pichu", 25, pokemon_electrique, 0, 1, 25, 10, 10, 3, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsAsh.add(new Pokemon("Pichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 3, new ArrayList(Arrays.asList(charge, foudre)), false));
         pokemonsAsh.add(new Pokemon("Carapuce", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
         pokemonsAsh.add(new Pokemon("Salamèche", 50, pokemon_feu, 0, 1, 50, 15, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
         pokemonsAsh.add(new Pokemon("Bulbizarre", 50, pokemon_plante, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
@@ -80,24 +81,9 @@ public class Main {
         pokemonsJessee.add(new Pokemon("Tortank", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
         pokemonsJessee.add(new Pokemon("Raichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
 
-        Pokemon Pikachu = pokemonsAsh.getFirst();
-        Pokemon Pichu = pokemonsAsh.get(1);
-        Pokemon Carapuce = pokemonsAsh.get(2);
-        Pokemon Salamèche = pokemonsAsh.get(3);
-        Pokemon Bulbizarre = pokemonsAsh.get(4);
-        Pokemon Rondoudou = pokemonsAsh.get(5);
-        Pokemon Electec = pokemonsJessee.get(0);
-        Pokemon Dracofeu = pokemonsJessee.get(1);
-        Pokemon Mr_MIME = pokemonsJessee.get(2);
-        Pokemon Rozbouton = pokemonsJessee.get(3);
-        Pokemon Tortank = pokemonsJessee.get(4);
-        Pokemon Raichu = pokemonsJessee.get(5);
-
-
-
         //Dresseur
-        Dresseur Ash = new Dresseur("Ash", pokemonsAsh, 0, 0, null, 0, Pikachu);
-        Dresseur Jessee = new Dresseur("Jessee", pokemonsJessee, 0, 0, null, 0, Electec);
+        Dresseur Ash = new Dresseur("Ash", pokemonsAsh, 0, 0, null, 0, pokemonsAsh.get(0));
+        Dresseur Jessee = new Dresseur("Jessee", pokemonsJessee, 0, 0, null, 0, pokemonsJessee.get(0));
 
         //Pokemon.Combat
         Combat arene = new Combat(new ArrayList<>(Arrays.asList(Ash, Jessee)), null);
