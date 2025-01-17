@@ -1,4 +1,4 @@
-import jdk.jfr.Percentage;
+package Pokemon.pokemons;
 
 public class Attaque {
     private String name;
@@ -58,7 +58,7 @@ public class Attaque {
 
     @Override
     public String toString() {
-        return "Attaque{" +
+        return "Pokemon.pokemons.Attaque{" +
                 "name='" + name + '\'' +
                 ", type=" + type +
                 ", damage=" + damage +

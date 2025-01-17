@@ -7,5 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bluecatcode.junit.4.10.extended" level="project" />
+    <orderEntry type="library" name="google.api.client.gson" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="squareup.okhttp3.sample.guide" level="project" />
+    <orderEntry type="library" name="squareup.okio" level="project" />
+    <orderEntry type="library" name="mongodb.driver.sync" level="project" />
   </component>
 </module>
