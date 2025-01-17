@@ -31,11 +31,11 @@ public class Main {
 
         //Liste des types d'attaques
         ArrayList<AttaqueType> attaqueTypes = new ArrayList<>();
-        attaqueTypes.add(new AttaqueType("normal", "Super efficace contre le type electrique", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("electrique"))));
-        attaqueTypes.add(new AttaqueType("feu", "Super efficace contre le type plante", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("plante"))));
-        attaqueTypes.add(new AttaqueType("electrique", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("normal")), new ArrayList<>(Arrays.asList("eau"))));
-        attaqueTypes.add(new AttaqueType("plante", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
-        attaqueTypes.add(new AttaqueType("eau", "Super efficace contre le type feu", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("feu"))));
+        attaqueTypes.add(new AttaqueType("normal", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("electrique"))));
+        attaqueTypes.add(new AttaqueType("feu", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("plante"))));
+        attaqueTypes.add(new AttaqueType("electrique", new ArrayList<>(Arrays.asList("normal")), new ArrayList<>(Arrays.asList("eau"))));
+        attaqueTypes.add(new AttaqueType("plante", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
+        attaqueTypes.add(new AttaqueType("eau", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("feu"))));
 
         AttaqueType attaque_normal = attaqueTypes.get(0);
         AttaqueType attaque_feu = attaqueTypes.get(1);
@@ -45,11 +45,11 @@ public class Main {
 
         //Liste des types de pokemons
         ArrayList<PokemonType> pokemonTypes = new ArrayList<>();
-        pokemonTypes.add(new PokemonType("normal", "Super efficace contre le type electrique", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("electrique"))));
-        pokemonTypes.add(new PokemonType("feu", "Super efficace contre le type plante", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("plante"))));
-        pokemonTypes.add(new PokemonType("electrique", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("normal")), new ArrayList<>(Arrays.asList("eau"))));
-        pokemonTypes.add(new PokemonType("plante", "Super efficace contre le type eau", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
-        pokemonTypes.add(new PokemonType("eau", "Super efficace contre le type feu", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("eau"))));
+        pokemonTypes.add(new PokemonType("normal", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("electrique"))));
+        pokemonTypes.add(new PokemonType("feu", new ArrayList<>(Arrays.asList("eau")), new ArrayList<>(Arrays.asList("plante"))));
+        pokemonTypes.add(new PokemonType("electrique", new ArrayList<>(Arrays.asList("normal")), new ArrayList<>(Arrays.asList("eau"))));
+        pokemonTypes.add(new PokemonType("plante", new ArrayList<>(Arrays.asList("feu")), new ArrayList<>(Arrays.asList("eau"))));
+        pokemonTypes.add(new PokemonType("eau", new ArrayList<>(Arrays.asList("plant")), new ArrayList<>(Arrays.asList("eau"))));
 
         PokemonType pokemon_normal = pokemonTypes.get(0);
         PokemonType pokemon_feu = pokemonTypes.get(1);
@@ -66,20 +66,20 @@ public class Main {
 
         //Liste des pokemons
         ArrayList<Pokemon> pokemonsAsh = new ArrayList<>();
-        pokemonsAsh.add(new Pokemon("Pikachu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 5, new ArrayList(Arrays.asList(charge, foudre)), false));
-        pokemonsAsh.add(new Pokemon("Pichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 3, new ArrayList(Arrays.asList(charge, foudre)), false));
-        pokemonsAsh.add(new Pokemon("Carapuce", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
-        pokemonsAsh.add(new Pokemon("Salamèche", 50, pokemon_feu, 0, 1, 50, 15, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
-        pokemonsAsh.add(new Pokemon("Bulbizarre", 50, pokemon_plante, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
-        pokemonsAsh.add(new Pokemon("Rondoudou", 50, pokemon_normal, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge)), false));
+        pokemonsAsh.add(new Pokemon("yo","Pikachu", 50, pokemon_electrique, 0, 1, 50, 10, 2,10, 5, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsAsh.add(new Pokemon("yo","Pichu", 50, pokemon_electrique, 0, 1, 50, 10, 2, 10, 3, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsAsh.add(new Pokemon("yo", "Carapuce", 50, pokemon_eau, 0, 1, 50, 10, 2, 10, 3, new ArrayList(Arrays.asList(charge, bulle_o)), false));
+        pokemonsAsh.add(new Pokemon("yo", "Salamèche", 50, pokemon_feu, 0, 1, 50, 15, 2, 10, 3, new ArrayList(Arrays.asList(charge, flameche)), false));
+        pokemonsAsh.add(new Pokemon("yo", "Bulbizarre", 50, pokemon_plante, 0, 1, 50, 10, 2, 10, 3, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
+        pokemonsAsh.add(new Pokemon("yo", "Rondoudou", 50, pokemon_normal, 0, 1, 50, 10, 2,10, 3, new ArrayList(Arrays.asList(charge)), false));
 
         ArrayList<Pokemon> pokemonsJessee = new ArrayList<>();
-        pokemonsJessee.add(new Pokemon("Electec", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
-        pokemonsJessee.add(new Pokemon("Dracofeu", 50, pokemon_feu, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
-        pokemonsJessee.add(new Pokemon("Mr MIME", 50, pokemon_normal, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge)), false));
-        pokemonsJessee.add(new Pokemon("Rozbouton", 50, pokemon_plante, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
-        pokemonsJessee.add(new Pokemon("Tortank", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
-        pokemonsJessee.add(new Pokemon("Raichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsJessee.add(new Pokemon("yo","Electec", 50, pokemon_electrique, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsJessee.add(new Pokemon("yo","Dracofeu", 50, pokemon_feu, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
+        pokemonsJessee.add(new Pokemon("yo","Mr MIME", 50, pokemon_normal, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge)), false));
+        pokemonsJessee.add(new Pokemon("yo","Rozbouton", 50, pokemon_plante, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
+        pokemonsJessee.add(new Pokemon("yo","Tortank", 50, pokemon_eau, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
+        pokemonsJessee.add(new Pokemon("yo","Raichu", 50, pokemon_electrique, 0, 1, 50, 10, 2, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
 
         //Dresseur
         Dresseur Ash = new Dresseur("Ash", pokemonsAsh, 0, 0, null, 0, pokemonsAsh.get(0));

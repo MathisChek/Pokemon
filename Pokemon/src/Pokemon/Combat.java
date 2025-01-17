@@ -113,7 +113,7 @@ public class Combat {
             // Demander à l'utilisateur un choix valide
             while (!validChoice) {
                 try {
-                    System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
+                    System.out.print("Veuillez entrer un choix \uD83D\uDD3D");
                     dresseur1choice = scanner.nextInt();
 
                     // Vérification si l'index est valide

@@ -8,9 +8,8 @@ public abstract class Type {
     private ArrayList<String> weaknesses;
     private ArrayList<String> strengths;
 
-    public Type(String name, String effect, ArrayList<String> weaknesses, ArrayList<String> strengths) {
+    public Type(String name, ArrayList<String> weaknesses, ArrayList<String> strengths) {
         this.name = name;
-        this.effect = effect;
         this.weaknesses = weaknesses;
         this.strengths = strengths;
     }

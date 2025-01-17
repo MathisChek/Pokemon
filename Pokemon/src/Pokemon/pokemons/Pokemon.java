@@ -1,25 +1,33 @@
 package Pokemon.pokemons;
 
+import org.bson.Document;
+
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Objects;
 
 
 public class Pokemon extends Personnage {
+    private String id;
     private int currentPV;
     private PokemonType type;
     private int level;
     private int exp;
-
     private int nextLevel;
-
-
     private int maxPV;
     private int attaque;
     private int defense;
     private int speed;
     private ArrayList<Attaque> moves;
     private Boolean ko;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getCurrentPV() {
         return currentPV;
@@ -113,8 +121,9 @@ public class Pokemon extends Personnage {
         this.ko = ko;
     }
 
-    public Pokemon(String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque, int defense, int speed, ArrayList<Attaque> moves, Boolean ko) {
+    public Pokemon(String id, String name, int currentPV, PokemonType type, int exp, int level, int maxPV, int attaque,int nextLevel, int defense, int speed, ArrayList<Attaque> moves, Boolean ko) {
         super(name);
+        this.id = id;
         this.currentPV = currentPV;
         this.type = type;
         this.exp = exp;
@@ -126,6 +135,25 @@ public class Pokemon extends Personnage {
         this.speed = speed;
         this.moves = moves;
         this.ko = ko;
+    }
+
+    public static Pokemon fromDocument(Document document) {
+        String id = document.getObjectId("_id").toString();
+        String name = document.getString("name");
+        int currentPV = document.getInteger("currentPV");
+        String typeName = document.getString("type");
+        PokemonType type = PokemonType.fromName(typeName);
+        int level = document.getInteger("level");
+        int nextLevel = document.getInteger("next_level");
+        int exp = document.getInteger("exp");
+        int maxPV = document.getInteger("maxPV");
+        int attack = document.getInteger("attack");
+        int defense = document.getInteger("defense");
+        int speed = document.getInteger("speed");
+        boolean ko = document.getBoolean("ko");
+        ArrayList<String> moves = (ArrayList<String>) document.get("moves");
+
+        return new Pokemon(id, name, currentPV, type, level, nextLevel, exp, maxPV, attack, defense, speed, ko, moves);
     }
 
     @Override
@@ -146,7 +174,7 @@ public class Pokemon extends Personnage {
     }
 
     public void attaquer(Pokemon cible, Attaque attaque) {
-        System.out.println(this.getName() + " attaque " + cible.getName() + " avec " + attaque.getName());
+        System.out.println("\n" + this.getName() + " attaque " + cible.getName() + " avec " + attaque.getName());
         cible.recevoirDegat(attaque, this.attaque);
     }
 
