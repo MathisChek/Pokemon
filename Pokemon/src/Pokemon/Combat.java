@@ -5,6 +5,7 @@ import Pokemon.pokemons.Pokemon;
 import Pokemon.pokemons.PokemonPrinter;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -106,10 +107,28 @@ public class Combat {
             y = 0;
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
-            int dresseur1choice = scanner.nextInt();
+            int dresseur1choice = -1;
+            boolean validChoice = false;
 
-            //Verification du résultat
+            // Demander à l'utilisateur un choix valide
+            while (!validChoice) {
+                try {
+                    System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
+                    dresseur1choice = scanner.nextInt();
+
+                    // Vérification si l'index est valide
+                    if (dresseur1choice >= 0 && dresseur1choice < dresseur1Pokemon.getMoves().size()) {
+                        validChoice = true; // Choix valide, sortir de la boucle
+                    } else {
+                        System.out.println("Choix invalide. Veuillez entrer un nombre entre 0 et " + (dresseur1Pokemon.getMoves().size() - 1));
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrée invalide. Veuillez entrer un nombre.");
+                    scanner.next(); // Consommer l'entrée incorrecte
+                }
+            }
+
+            // Vérification du résultat
             if (dresseur1Pokemon.getSpeed() > dresseur2Pokemon.getSpeed()) {
                 dresseur1Pokemon.attaquer(dresseur2Pokemon, dresseur1.getCurrentPokemon().getMoves().get(dresseur1choice));
                 System.out.println("\nLes pv de " + dresseur2Pokemon.getName() + " sont maintenant de : " + dresseur2Pokemon.getCurrentPV());
@@ -170,6 +189,7 @@ public class Combat {
             }
             nbTour++;
         }
+
         if (dresseur1.pokemonsKo()) {
             System.out.println(dresseur2.getName() + " t'as vaincue ! La team rocket s'envole");
             PokemonPrinter.printPokemon(dresseur2.getName());
@@ -185,4 +205,5 @@ public class Combat {
             dresseur1.setVictories(+1);
         }
     }
+
 }
