@@ -2,6 +2,7 @@ package Pokemon;
 
 import Pokemon.pokemons.Dresseur;
 import Pokemon.pokemons.Pokemon;
+import Pokemon.pokemons.PokemonPrinter;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -51,6 +52,7 @@ public class Combat {
         if (dresseur1Pokemon.getKo()) {
             dresseur.changePokemon();
             System.out.println(dresseur.getName() + " envoie : " + dresseur.getCurrentPokemon().getName());
+            PokemonPrinter.printPokemon(dresseur.getCurrentPokemon().getName());
         }
     }
 
@@ -64,6 +66,8 @@ public class Combat {
                 pokemon1.gagneXP(pokemon);
                 if (dresseur.pokemonsKo()) {return ;}
                 System.out.println(dresseur.getName() + " envoie : " + dresseur.getCurrentPokemon().getName() + "\n");
+                PokemonPrinter.printPokemon(dresseur.getCurrentPokemon().getName());
+
             }
         } else {
             return;
@@ -74,12 +78,17 @@ public class Combat {
         Pokemon dresseur1Pokemon = dresseur1.getCurrentPokemon();
         Pokemon dresseur2Pokemon = dresseur2.getCurrentPokemon();
         System.out.println("Dresseur " + dresseur2.getName() + " te défis en duel !");
+        PokemonPrinter.printPokemon(dresseur2.getName());
+
         sleep(1000);
 
-        System.out.println("Dresseur " + dresseur2.getName() + " envoie : " + dresseur2.getPokemons().getFirst().getName());
+        System.out.println("Dresseur " + dresseur2.getName() + " envoie : " + dresseur2.getPokemons().get(0).getName());
+        PokemonPrinter.printPokemon(dresseur2.getPokemons().get(0).getName());
         sleep(1000);
 
         System.out.println("Dresseur " + dresseur1.getName() + " envoie : " + dresseur1.getCurrentPokemon().getName() + "\n");
+        PokemonPrinter.printPokemon(dresseur1.getPokemons().get(0).getName());
+
         sleep(1000);
 
         int nbTour = 1;
@@ -97,6 +106,7 @@ public class Combat {
             y = 0;
 
             Scanner scanner = new Scanner(System.in);
+            System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
             int dresseur1choice = scanner.nextInt();
 
             //Verification du résultat
@@ -162,10 +172,16 @@ public class Combat {
         }
         if (dresseur1.pokemonsKo()) {
             System.out.println(dresseur2.getName() + " t'as vaincue ! La team rocket s'envole");
+            PokemonPrinter.printPokemon(dresseur2.getName());
+
             dresseur1.setDefeates(+1);
         } else if (dresseur2.pokemonsKo()) {
             System.out.println("Tu as vaincu dresseur : " + dresseur2.getName() + " !");
+            PokemonPrinter.printPokemon(dresseur1.getName());
+
             System.out.println("Tu as obtenu le badge ciel !");
+            PokemonPrinter.printPokemon("Badge");
+
             dresseur1.setVictories(+1);
         }
     }

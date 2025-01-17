@@ -155,7 +155,7 @@ public class Pokemon extends Personnage {
         if (rand > attaque.getAccuracy() ) {
             System.out.println("Attaque failed");
         } else {
-            if (Objects.equals(attaque.getType().getStrengths().getFirst(), this.getType().getName())) {
+            if (Objects.equals(attaque.getType().getStrengths().get(0), this.getType().getName())) {
                 this.currentPV -= (((attaque.getDamage() * puissance) / this.defense) * 1.2);
                 System.out.println("super efficace");
             } else if (this.getType().getStrengths().get(0).equals(attaque.getType().getName())){
@@ -182,9 +182,12 @@ public class Pokemon extends Personnage {
                 this.attaque += 2;
                 this.defense += 1;
                 this.speed += 1;
+                this.currentPV += 10;
+                this.maxPV += 10;
                 System.out.println("Nouvelle attaque : " + this.attaque);
                 System.out.println("Nouvelle défense : " + this.defense);
-                System.out.println("Nouvelle vitesse : " + this.speed + "\n");
+                System.out.println("Nouvelle vitesse : " + this.speed );
+                System.out.println("Nouvelle vitalité : " + this.currentPV + "\n");
 
             }
 
