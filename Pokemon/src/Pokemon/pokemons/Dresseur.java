@@ -87,6 +87,7 @@ public class Dresseur extends Personnage {
         while (i != 6){
             System.out.println("Pokemon restant à choisir : " + y );
             Scanner scanner = new Scanner(System.in);
+
             i ++;
             y --;
         }
@@ -117,6 +118,7 @@ public class Dresseur extends Personnage {
         this.afficherAllPokemons(this.getPokemons());
         System.out.println("Choisi ton pokemon :");
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
         int pokemonId = scanner.nextInt();
 
         this.setCurrentPokemon(this.getPokemons().get(pokemonId));
