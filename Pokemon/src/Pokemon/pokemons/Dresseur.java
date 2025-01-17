@@ -2,6 +2,7 @@ package Pokemon.pokemons;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Dresseur extends Personnage {
     private ArrayList<Pokemon> pokemons;
@@ -115,13 +116,34 @@ public class Dresseur extends Personnage {
     }
 
     public void changePokemon() {
-        this.afficherAllPokemons(this.getPokemons());
-        System.out.println("Choisi ton pokemon :");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
-        int pokemonId = scanner.nextInt();
+        boolean choixValide = false;
 
-        this.setCurrentPokemon(this.getPokemons().get(pokemonId));
+        while (!choixValide) {
+            try {
+                this.afficherAllPokemons(this.getPokemons());
+                System.out.println("Choisi ton pokemon :");
+                System.out.print("Veuillez entrer un choix \uD83D\uDD3D ");
+                int pokemonId = scanner.nextInt();
+
+                // Vérifie si l'ID entré est valide
+                if (pokemonId < 0 || pokemonId >= this.getPokemons().size()) {
+                    System.out.println(" ");
+                    throw new IndexOutOfBoundsException("Le choix est hors des limites.");
+                }
+
+                // Si tout est correct, définissez le Pokémon courant et sortez de la boucle
+                this.setCurrentPokemon(this.getPokemons().get(pokemonId));
+                choixValide = true; // Sortir de la boucle
+            } catch (InputMismatchException e) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
+                scanner.nextLine(); // Nettoie le tampon pour éviter une boucle infinie
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Le numéro saisi est hors des limites. Essayez encore.");
+            } catch (Exception e) {
+                System.out.println("Une erreur inattendue s'est produite : " + e.getMessage());
+            }
+        }
     }
 
 }
