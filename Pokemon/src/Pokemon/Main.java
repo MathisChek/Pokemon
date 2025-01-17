@@ -5,14 +5,28 @@ import Pokemon.pokemons.Attaque;
 import Pokemon.pokemons.AttaqueType;
 import Pokemon.pokemons.Pokemon;
 import Pokemon.pokemons.PokemonType;
+import Pokemon.pokemons.ConnectDB;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+
+//        String uri = "mongodb+srv://mathischekraouimc:Yamakasi99@cluster0.xmglm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+//        try (MongoClient mongoClient = MongoClients.create(uri)) {
+//            MongoDatabase db = mongoClient.getDatabase("PokemonDB");
+//            MongoCollection<Document> collection = db.getCollection("Pokemon");
+//
+//            for (Document doc : collection.find()) {
+//                System.out.println(doc.toJson());
+//            }
+//        }
 
         //Liste des types d'attaques
         ArrayList<AttaqueType> attaqueTypes = new ArrayList<>();
@@ -49,7 +63,6 @@ public class Main {
         Attaque trancheHerbe = new Attaque("Tranche herbe", attaque_plante, 10, 5, 100, 10);
         Attaque bulle_o = new Attaque("Bulle'O", attaque_eau, 10, 5, 100, 10);
 
-
         //Liste des pokemons
         ArrayList<Pokemon> pokemonsAsh = new ArrayList<>();
         pokemonsAsh.add(new Pokemon("Pikachu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 5, new ArrayList(Arrays.asList(charge, foudre)), false));
@@ -61,11 +74,11 @@ public class Main {
 
         ArrayList<Pokemon> pokemonsJessee = new ArrayList<>();
         pokemonsJessee.add(new Pokemon("Electec", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
-//        pokemonsJessee.add(new Pokemon("Dracofeu", 50, pokemon_feu, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
-//        pokemonsJessee.add(new Pokemon("Mr MIME", 50, pokemon_normal, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge)), false));
-//        pokemonsJessee.add(new Pokemon("Rozbouton", 50, pokemon_plante, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
-//        pokemonsJessee.add(new Pokemon("Tortank", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
-//        pokemonsJessee.add(new Pokemon("Raichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
+        pokemonsJessee.add(new Pokemon("Dracofeu", 50, pokemon_feu, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, flameche)), false));
+        pokemonsJessee.add(new Pokemon("Mr MIME", 50, pokemon_normal, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge)), false));
+        pokemonsJessee.add(new Pokemon("Rozbouton", 50, pokemon_plante, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, trancheHerbe)), false));
+        pokemonsJessee.add(new Pokemon("Tortank", 50, pokemon_eau, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, bulle_o)), false));
+        pokemonsJessee.add(new Pokemon("Raichu", 50, pokemon_electrique, 0, 1, 50, 10, 10, 2, new ArrayList(Arrays.asList(charge, foudre)), false));
 
         Pokemon Pikachu = pokemonsAsh.getFirst();
         Pokemon Pichu = pokemonsAsh.get(1);
@@ -74,19 +87,13 @@ public class Main {
         Pokemon Bulbizarre = pokemonsAsh.get(4);
         Pokemon Rondoudou = pokemonsAsh.get(5);
         Pokemon Electec = pokemonsJessee.get(0);
-//        Pokemon Dracofeu = pokemonsJessee.get(1);
-//        Pokemon Mr_MIME = pokemonsJessee.get(2);
-//        Pokemon Rozbouton = pokemonsJessee.get(3);
-//        Pokemon Tortank = pokemonsJessee.get(4);
-//        Pokemon Raichu = pokemonsJessee.get(5);
+        Pokemon Dracofeu = pokemonsJessee.get(1);
+        Pokemon Mr_MIME = pokemonsJessee.get(2);
+        Pokemon Rozbouton = pokemonsJessee.get(3);
+        Pokemon Tortank = pokemonsJessee.get(4);
+        Pokemon Raichu = pokemonsJessee.get(5);
 
 
-        String uri = "mongodb+srv://mathischekraouimc:Yamakasi99@cluster0.xmglm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-        try (MongoClient mongoClient = MongoClients.create(uri)) {
-            System.out.println("Connected to MongoDB");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         //Dresseur
         Dresseur Ash = new Dresseur("Ash", pokemonsAsh, 0, 0, null, 0, Pikachu);

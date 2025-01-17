@@ -175,7 +175,7 @@ public class Pokemon extends Personnage {
 
             while(this.exp>this.nextLevel) {
                 this.level ++;
-                System.out.println(this.getName() + " a gagné un niveau ! ");
+                System.out.println("\n" + this.getName() + " a gagné un niveau ! ");
                 this.nextLevel += 30;
                 System.out.println(this.getName() + " à gagné " + xpGagnee + " points d'expérience ! Niveau : " + this.level);
 
@@ -184,8 +184,7 @@ public class Pokemon extends Personnage {
                 this.speed += 1;
                 System.out.println("Nouvelle attaque : " + this.attaque);
                 System.out.println("Nouvelle défense : " + this.defense);
-                System.out.println("Nouvelle vitesse : " + this.speed);
-
+                System.out.println("Nouvelle vitesse : " + this.speed + "\n");
 
             }
 
