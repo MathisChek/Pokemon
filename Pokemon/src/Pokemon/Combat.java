@@ -54,14 +54,15 @@ public class Combat {
         }
     }
 
-    public void ordiPokemonStatus(Dresseur dresseur, Pokemon pokemon) {
+    public void ordiPokemonStatus(Dresseur dresseur, Pokemon pokemon, Pokemon pokemon1) {
         if (index < dresseur.getPokemons().size()) {
             if (pokemon.getCurrentPV() <= 0) {
                 pokemon.setKo(true);
                 if (index+1 < dresseur.getPokemons().size()) { dresseur.setCurrentPokemon(dresseur.getPokemons().get(index+1)); }
                 index++;
                 System.out.println(pokemon.getName() + " est ko");
-                if (dresseur.pokemonsKo()) {return;}
+                pokemon1.gagneXP(pokemon);
+                if (dresseur.pokemonsKo()) {return ;}
                 System.out.println(dresseur.getName() + " envoie : " + dresseur.getCurrentPokemon().getName() + "\n");
             }
         } else {
@@ -104,8 +105,9 @@ public class Combat {
                 System.out.println("\nLes pv de " + dresseur2Pokemon.getName() + " sont maintenant de : " + dresseur2Pokemon.getCurrentPV());
                 sleep(1000);
 
-                ordiPokemonStatus(dresseur2, dresseur2Pokemon);
+                ordiPokemonStatus(dresseur2, dresseur2Pokemon, dresseur1Pokemon);
                 dresseur2Pokemon = dresseur2.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
 
                 Random random = new Random();
                 int randomInt = random.nextInt(dresseur2Pokemon.getMoves().size());
@@ -115,6 +117,7 @@ public class Combat {
 
                 userPokemonStatus(dresseur1, dresseur1Pokemon);
                 dresseur1Pokemon = dresseur1.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
 
             } else if (dresseur1Pokemon.getSpeed() < dresseur2Pokemon.getSpeed()) {
                 Random random = new Random();
@@ -125,20 +128,24 @@ public class Combat {
 
                 userPokemonStatus(dresseur1, dresseur1Pokemon);
                 dresseur1Pokemon = dresseur1.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
 
                 dresseur1Pokemon.attaquer(dresseur2Pokemon, dresseur1.getCurrentPokemon().getMoves().get(dresseur1choice));
                 System.out.println("\nLes pv de " + dresseur2Pokemon.getName() + " sont maintenant de : " + dresseur2Pokemon.getCurrentPV());
                 sleep(1000);
 
-                ordiPokemonStatus(dresseur2, dresseur2Pokemon);
+                ordiPokemonStatus(dresseur2, dresseur2Pokemon, dresseur1Pokemon);
                 dresseur2Pokemon = dresseur2.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
+
             } else {
                 dresseur1Pokemon.attaquer(dresseur2Pokemon, dresseur1.getCurrentPokemon().getMoves().get(dresseur1choice));
                 System.out.println("\nLes pv de " + dresseur2Pokemon.getName() + " sont maintenant de : " + dresseur2Pokemon.getCurrentPV());
                 sleep(1000);
 
-                ordiPokemonStatus(dresseur2, dresseur2Pokemon);
+                ordiPokemonStatus(dresseur2, dresseur2Pokemon, dresseur1Pokemon);
                 dresseur2Pokemon = dresseur2.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
 
                 Random random = new Random();
                 int randomInt = random.nextInt(dresseur2Pokemon.getMoves().size());
@@ -148,16 +155,17 @@ public class Combat {
 
                 userPokemonStatus(dresseur1, dresseur1Pokemon);
                 dresseur1Pokemon = dresseur1.getCurrentPokemon();
+                if (dresseur1.pokemonsKo() || dresseur2.pokemonsKo()) { break; }
+
             }
             nbTour++;
-            System.out.println("Ash ko? " + dresseur1.pokemonsKo());
-            System.out.println("Jessee ko? " + dresseur2.pokemonsKo());
         }
         if (dresseur1.pokemonsKo()) {
-            System.out.println("Tu as perdu !");
+            System.out.println(dresseur2.getName() + " t'as vaincue ! La team rocket s'envole");
             dresseur1.setDefeates(+1);
         } else if (dresseur2.pokemonsKo()) {
-            System.out.println("Tu as gagné !");
+            System.out.println("Tu as vaincu dresseur : " + dresseur2.getName() + " !");
+            System.out.println("Tu as obtenu le badge ciel !");
             dresseur1.setVictories(+1);
         }
     }
